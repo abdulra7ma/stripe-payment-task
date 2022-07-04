@@ -2,12 +2,12 @@
 from rest_framework.exceptions import APIException
 
 
-class CustomerNotFound(APIException):
-    """Raise a HTTP 404 error when Customer not found in the DB"""
+class userNotFound(APIException):
+    """Raise a HTTP 404 error when User not found in the DB"""
 
     status_code = 404
-    default_detail = "There is no such a customer with this ID in our DB"
-    default_code = "customer_not_found"
+    default_detail = "User does not exists"
+    default_code = "user_not_found"
 
 
 class NotCorrectParameters(APIException):
@@ -16,5 +16,3 @@ class NotCorrectParameters(APIException):
     status_code = 400
     default_detail = "Not correct query parameters"
     default_code = "not_correct_query_params"
-
-

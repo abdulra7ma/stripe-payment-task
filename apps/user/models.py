@@ -16,7 +16,7 @@ from .utils.constants import ModelConst
 
 class User(DateTimeMixin, CustomUser):
     """
-    Customer model defines basic user attributes for login and signup
+    User model defines basic user attributes for login and signup
     """
 
     first_name = models.CharField(

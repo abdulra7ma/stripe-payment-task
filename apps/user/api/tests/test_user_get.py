@@ -10,18 +10,18 @@ from rest_framework.test import APIClient
 from lib.utils.testing.core import CoreAPITestCase
 
 
-class CustomerGetTestCase(CoreAPITestCase):
+class UserGetTestCase(CoreAPITestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.user_obj = UserFactory.build(password="customer")
+        cls.user_obj = UserFactory.build(password="user")
 
         # generate a user object and activate it
         cls.user_saved = UserFactory.create(password="qwerty1234")
 
         # initail the api client for making requests
         cls.client = APIClient()
-        cls.customer_url = reverse("customer-api")
+        cls.user_url = reverse("user-api")
         cls.token_url = reverse("token_obtain_pair")
 
     def get_token(self):
@@ -36,7 +36,7 @@ class CustomerGetTestCase(CoreAPITestCase):
         self.client.credentials(
             HTTP_AUTHORIZATION="Bearer " + self.get_token()
         )
-        response = self.client.get(self.customer_url)
+        response = self.client.get(self.user_url)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(
