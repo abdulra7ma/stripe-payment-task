@@ -28,6 +28,7 @@ class User(DateTimeMixin, CustomUser):
     surname = models.CharField(
         max_length=Const.NAME_MAX_LENGTH, help_text=ModelConst.SURNAME
     )
+
     phone_number = models.CharField(
         max_length=Const.PHONE_NUMBER_MAX_LENGTH, blank=True
     )
@@ -39,6 +40,7 @@ class User(DateTimeMixin, CustomUser):
     class Meta:
         verbose_name = "User"
         verbose_name_plural = "Users"
+        app_label = "user"
 
     def __str__(self):
         return self.email

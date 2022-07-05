@@ -15,7 +15,16 @@ from rest_framework_simplejwt.views import (
 from .swagger.urls import swagger_urlpatterns
 
 # include all your api endpoints here
-api_urlpatterns = []
+api_urlpatterns = [
+    path(
+        "user",
+        include("user.api.urls"),
+    ),
+    path(
+        "auth",
+        include("authentication.api.urls"),
+    ),
+]
 
 # include any token related endpoint
 token_urlpatterns = [

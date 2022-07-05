@@ -47,7 +47,10 @@ DJANGO_DEFAULT_APPS = (
 )
 
 
-LOCAL_APPS = ("authentication", "user")
+LOCAL_APPS = (
+    "user",
+    "authentication",
+)
 
 THIRD_PARTY_APPS = (
     "rest_framework",
@@ -122,10 +125,10 @@ STATIC_URL = "/static/"
 # the URL for media files
 MEDIA_URL = "/media/"
 
-
 # ##### DEBUG CONFIGURATION ###############################
 DEBUG = False
 
+APPEND_SLASH = False
 
 # finally grab the SECRET KEY
 try:

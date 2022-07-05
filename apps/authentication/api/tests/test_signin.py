@@ -2,87 +2,89 @@
 from django.urls import reverse
 
 # external imports
+import pytest
 from rest_framework import status
 
-# app imports
-from lib.utils.testing.core import CoreAPITestCase
 
 # app imports
 from .factory import UserFactory
 
+pytestmark = pytest.mark.django_db
+login_url = reverse("login-api")
 
-class UserLogInTestCase(CoreAPITestCase):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
 
-        cls.user_password = cls().get_password()
+def test_login_user_with_valid_credentials(client):
+    password = "vdjvnjfkvjdsjvnEJBD766"
 
-        cls.user_obj = UserFactory.build(password=cls.user_password)
+    # creates a new user object and save into DB
+    user = UserFactory.create(password=password)
 
-        # generate a user object
-        cls.user_saved = UserFactory.create(password=cls.user_password)
+    # prepare auth login credintails
+    credintails = {"email": user.email, "password": password}
 
-        # define the login endpoint
-        # example -> {current-domian}/api/auth/login
-        cls.login_url = reverse("login-api")
+    response = client.post(login_url, data=credintails)
 
-    def test_login_user_with_valid_credentials(self):
-        credintails = {
-            "email": self.user_saved.email,
-            "password": self.user_password,
-        }
+    assert response.status_code == 200
+    assert response.data["user"]["email"] == user.email
+    assert response.data["user"]["first_name"] == user.first_name
+    assert response.data["user"]["middle_name"] == user.middle_name
+    assert response.data["user"]["surname"] == user.surname
+    assert response.data["user"]["phone_number"] == user.phone_number
+    assert response.data["user"]["birthday"] == user.birthday
 
-        response = self.client.post(self.login_url, data=credintails)
 
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+def test_login_user_with_invalid_credentials(client):
+    credintails = {
+        "email": "gdsvfuvsdjfv",
+        "password": "qwerty1234",
+    }
 
-    def test_login_user_with_invalid_credentials(self):
-        credintails = {
-            "email": "gdsvfuvsdjfv",
-            "password": "qwerty1234",
-        }
+    # login request
+    response = client.post(login_url, data=credintails)
 
-        # login request
-        response = self.client.post(self.login_url, data=credintails)
+    assert response.status_code == status.HTTP_401_UNAUTHORIZED
 
-        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
-    def test_uncorrect_password_and_email_fields(self):
-        unvaild_pass_msg = "invaild credentials"
-        unvaild_email_msg = "Invalid email address."
+def test_uncorrect_password_and_email_fields(client):
+    unvaild_pass_msg = "invaild credentials"
+    unvaild_email_msg = "Invalid email address."
 
-        credintails = {
-            "email": self.user_obj.email,
-            "password": "qwer1234",
-        }
+    # creates a new user object but not save it to the DB
+    unsaved_user = UserFactory.build()
 
-        # login request for the unvaild email error
-        response = self.client.post(self.login_url, data=credintails)
+    # creates a new user object and save into DB
+    user = UserFactory.create()
 
-        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+    credintails = {
+        "email": unsaved_user.email,
+        "password": "qwer1234",
+    }
 
-        # compare the `unvaild_email_msg` variable and
-        # the returned unvaild email message
-        self.assertEqual(response.data["non_field_errors"], unvaild_email_msg)
+    # login request for the unvaild email error
+    response = client.post(login_url, data=credintails)
 
-        # change the value of the `email` key to a vaild email
-        credintails["email"] = self.user_saved.email
+    assert response.status_code == status.HTTP_401_UNAUTHORIZED
 
-        # login request for the unvaild password error
-        response = self.client.post(self.login_url, data=credintails)
+    # compare the `unvaild_email_msg` variable and
+    # the returned unvaild email message
+    assert response.data["non_field_errors"] == unvaild_email_msg
 
-        # compare the `unvaild_pass_msg` variable and
-        # the returned unvaild password message
-        self.assertEqual(response.data["detail"], unvaild_pass_msg)
+    # change the value of the `email` key to a vaild email
+    credintails["email"] = user.email
 
-    def test_empty_values_for_password_and_email(self):
-        credintails = {"email": "", "password": ""}
+    # login request for the unvaild password error
+    response = client.post(login_url, data=credintails)
 
-        response = self.client.post(self.login_url, data=credintails)
+    # compare the `unvaild_pass_msg` variable and
+    # the returned unvaild password message
+    assert response.data["detail"] == unvaild_pass_msg
 
-        self.assertEqual(
-            response.status_code, self.status.HTTP_401_UNAUTHORIZED
-        )
-        self.assertEqual(response.data["email"], "Email may not be blank")
-        self.assertEqual(response.data["password"], "Password may not be blank")
+
+def test_empty_values_for_password_and_email(client):
+    credintails = {"email": "", "password": ""}
+
+    response = client.post(login_url, data=credintails)
+
+    assert response.status_code == status.HTTP_401_UNAUTHORIZED
+    assert response.data["email"] == "Email may not be blank"
+    assert response.data["password"] == "Password may not be blank"

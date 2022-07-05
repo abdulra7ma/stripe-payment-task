@@ -134,8 +134,6 @@ class LogIn(generics.GenericAPIView):
         user = User.objects.get(email=login_serializer.data.get("email"))
         self.login(request, user)
 
-        user_pic_obj, created = UserPic.objects.get_or_create(user=user)
-
         # generate account access token
         refresh_token = RefreshToken.for_user(user)
         access_token = refresh_token.access_token

@@ -121,112 +121,112 @@ def send_mail(subject, email_body, to):
 
 
 # @shared_task(serializer="pickle")
-# def send_email_activation_link(user, email, site_domain):
-#     """
-#     Sends activation email to the new signing user
+def send_email_activation_link(user, email, site_domain):
+    """
+    Sends activation email to the new signing user
 
-#     Arguments:
-#         email (str): the new sign up user email
+    Arguments:
+        email (str): the new sign up user email
 
-#     Return:
-#         bool: pass
+    Return:
+        bool: pass
 
-#     """
+    """
 
-#     # generate account activation token
-#     token = ActivationToken.for_user(user)
+    # generate account activation token
+    token = ActivationToken.for_user(user)
 
-#     relativeLink = "/auth"
+    relativeLink = "/auth"
 
-#     # activation url
-#     absurl = site_domain + relativeLink + "?token=" + str(token)
-#     email_body = (
-#         "Hi "
-#         + user.full_name
-#         + " Use the link below to verify your email \n"
-#         + absurl
-#     )
+    # activation url
+    absurl = site_domain + relativeLink + "?token=" + str(token)
+    email_body = (
+        "Hi "
+        + user.full_name
+        + " Use the link below to verify your email \n"
+        + absurl
+    )
 
-#     send_mail(subject="Verify your email", to=email, email_body=email_body)
+    send_mail(subject="Verify your email", to=email, email_body=email_body)
 
-#     return True
-
-
-# @shared_task(serializer="pickle")
-# def send_email_deactivation_link(user, email, site_domain):
-#     """
-#     Sends deactivation email to the an exist user
-
-#     Arguments:
-#         email (str): exist user email
-
-#     Return:
-#         bool: pass
-
-#     """
-
-#     # generate account activation token
-#     token = DeactivationToken.for_user(user)
-
-#     # get the site domain
-#     current_site = site_domain
-
-#     relativeLink = reverse("account-deactivate")
-
-#     # activation url
-#     absurl = "http://" + current_site + relativeLink + "?token=" + str(token)
-#     email_body = (
-#         "Dear User "
-#         + user.full_name
-#         + "\n\n"
-#         + " Use this link below to deactivate your account: \n"
-#         + absurl
-#     )
-
-#     send_mail(subject="Deactivate account", to=email, email_body=email_body)
-
-#     return "Successfully sended deactivation email"
+    return True
 
 
 # @shared_task(serializer="pickle")
-# def send_email_password_rest(user, email, site_domain):
-#     # generate account activation token
-#     token = RefreshToken.for_user(user).access_token
+def send_email_deactivation_link(user, email, site_domain):
+    """
+    Sends deactivation email to the an exist user
 
-#     relativeLink = reverse("forgot-password-confirm")
+    Arguments:
+        email (str): exist user email
 
-#     # activation url
-#     absurl = "http://" + site_domain + relativeLink + "?token=" + str(token)
-#     email_body = (
-#         "Dear User "
-#         + user.full_name
-#         + "\n\n"
-#         + " Use this link below to reset your account password: \n"
-#         + absurl
-#     )
+    Return:
+        bool: pass
 
-#     send_mail(subject="Reset Password", to=email, email_body=email_body)
+    """
 
-#     return True
+    # generate account activation token
+    token = DeactivationToken.for_user(user)
+
+    # get the site domain
+    current_site = site_domain
+
+    relativeLink = reverse("account-deactivate")
+
+    # activation url
+    absurl = "http://" + current_site + relativeLink + "?token=" + str(token)
+    email_body = (
+        "Dear User "
+        + user.full_name
+        + "\n\n"
+        + " Use this link below to deactivate your account: \n"
+        + absurl
+    )
+
+    send_mail(subject="Deactivate account", to=email, email_body=email_body)
+
+    return "Successfully sended deactivation email"
+
+
+# @shared_task(serializer="pickle")
+def send_email_password_rest(user, email, site_domain):
+    # generate account activation token
+    token = RefreshToken.for_user(user).access_token
+
+    relativeLink = reverse("forgot-password-confirm")
+
+    # activation url
+    absurl = "http://" + site_domain + relativeLink + "?token=" + str(token)
+    email_body = (
+        "Dear User "
+        + user.full_name
+        + "\n\n"
+        + " Use this link below to reset your account password: \n"
+        + absurl
+    )
+
+    send_mail(subject="Reset Password", to=email, email_body=email_body)
+
+    return True
 
 
 # @shared_task(bind=True)
-# def send_email_change_email(user, email, site_domain):
-#     # generate account activation token
-#     token = ChangeEmailToken.for_user(user)
+def send_email_change_email(user, email, site_domain):
+    # generate account activation token
+    token = ChangeEmailToken.for_user(user)
 
-#     relativeLink = reverse("change-email")
+    relativeLink = reverse("change-email")
 
-#     # activation url
-#     absurl = "http://" + site_domain + relativeLink + "?token=" + str(token)
-#     email_body = (
-#         "Dear User "
-#         + user.full_name
-#         + "\n\n"
-#         + " Use this link below to chaneg your account email: \n"
-#         + absurl
-#     )
+    # activation url
+    absurl = "http://" + site_domain + relativeLink + "?token=" + str(token)
+    email_body = (
+        "Dear User "
+        + user.full_name
+        + "\n\n"
+        + " Use this link below to chaneg your account email: \n"
+        + absurl
+    )
 
-#     send_mail(subject="Change Email", to=email, email_body=email_body)
+    send_mail(subject="Change Email", to=email, email_body=email_body)
 
-#     return True
+    return True

@@ -2,9 +2,9 @@
 from django.urls import path
 
 # app imports
-from .views import UserAPIView, UserImageAPIView
+from .views import UserAPIView
 
 urlpatterns = [
-    path("", UserAPIView.as_view(), name="user-api-1"),
-    # path("/profile-photo", UserImageAPIView.as_view(), name="profile-photo-api"), 
+    path("", UserAPIView.as_view(), name="user-api"),
+    # path("/profile-photo", UserImageAPIView.as_view(), name="profile-photo-api"),
 ]

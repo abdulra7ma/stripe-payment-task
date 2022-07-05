@@ -2,6 +2,7 @@
 from django.urls import reverse
 
 # external imports
+import pytest
 from rest_framework import status
 
 # app imports
@@ -9,6 +10,9 @@ from lib.utils.testing.core import CoreAPITestCase
 
 # app imports
 from .factory import UserFactory
+
+pytestmark = pytest.mark.django_db
+logout_url = reverse("signout-api")
 
 
 class UserLogOutTestCase(CoreAPITestCase):
@@ -39,7 +43,7 @@ class UserLogOutTestCase(CoreAPITestCase):
         response = self.client.post(
             self.logout_url, data={"token": tokens["refresh"]}
         )
-        
+
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
         # post request to with the same refresh token to get 400 error code
@@ -63,3 +67,32 @@ class UserLogOutTestCase(CoreAPITestCase):
         credentials = super().get_credentials(user=self.user_saved)
         credentials["password"] = self.user_password
         return credentials
+
+
+def get_tokens(client):
+    """
+    gets access and refresh tokens
+    """
+    token_url = reverse("token_obtain_pair")
+    tokens = client.post(token_url, data=self.get_credentials())
+    return tokens.data
+
+
+def test_logout_user(client):
+    self.provide_authorization_credentials()
+
+    # get the refresh and access tokens
+    tokens = self.get_tokens
+
+    # post request to the sign-out url with refresh token as the given data
+    response = client.post(logout_url, data={"token": tokens["refresh"]})
+
+    self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+    # post request to with the same refresh token to get 400 error code
+    response = self.client.post(
+        self.logout_url, data={"token": tokens["refresh"]}
+    )
+
+    self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+    self.assertAlmostEqual(response.data, "Token is blacklisted")

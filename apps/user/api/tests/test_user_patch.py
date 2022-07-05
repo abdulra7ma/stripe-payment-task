@@ -7,6 +7,10 @@ from user.models import User
 # app imports
 from lib.utils.testing.core import CoreAPITestCase
 
+import pytest
+
+pytestmark = pytest.mark.django_db
+
 
 class UserGetTestCase(CoreAPITestCase):
     @classmethod
