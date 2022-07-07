@@ -21,8 +21,8 @@ class Redis:
         self,
         host: str,
         port: int,
+        model: models.Model,
         db: int = 0,
-        model: models.Model = apps.get_model("flight.FlightCacheId"),
     ) -> None:
         self.host = host
         self.port = port

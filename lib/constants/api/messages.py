@@ -17,10 +17,10 @@ class SuccessMessage:
     SIGNED_IN = _("Successfully signed In")
     SIGNED_OUT = _("Successfully signed Out")
 
-    """ FLIGHT """
-    FLIGHT_RETRIEVED = _("Successfully flight retrieved")
-    FLIGHTS_RETRIEVED = _("Successfully flights retrieved")
-    FLIGHT_PURCHASED = _("Successfully flight purchased")
+    """ OBJECT """
+    OBJECT_RETRIEVED = _("Successfully OBJECT retrieved")
+    OBJECTS_RETRIEVED = _("Successfully OBJECTs retrieved")
+    OBJECT_PURCHASED = _("Successfully OBJECT purchased")
 
     """ PAYMENT """
     PAYMENT_PROCESSED = _("Successfully payment processed")
@@ -43,11 +43,11 @@ class ErrorMessage:
     FAILED_TO_SIGN_OUT = _("Failed to sign out")
     ACTIVATION_LINK_EXPIRED = _("Activations link expired")
 
-    """ FLIGHT """
-    FAILED_TO_RETRIEVE_FLIGHT = _("Failed to retrieve flight")
-    FAILED_TO_PURCHASE_FLIGHT = _("Failed to purchase flight")
-    FAILED_TO_RETRIEVE_FLIGHTS = _("Failed to retrieve flights")
-    FAILED_TO_PURCHASE_FLIGHTS = _("Failed to purchase flights")
+    """ OBJECT """
+    FAILED_TO_RETRIEVE_OBJECT = _("Failed to retrieve OBJECT")
+    FAILED_TO_PURCHASE_OBJECT = _("Failed to purchase OBJECT")
+    FAILED_TO_RETRIEVE_OBJECTS = _("Failed to retrieve OBJECTs")
+    FAILED_TO_PURCHASE_OBJECTS = _("Failed to purchase OBJECTs")
 
     """ PAYMENT """
     FAILED_TO_PROCESS_PAYMENT = _("Failed to process payment")

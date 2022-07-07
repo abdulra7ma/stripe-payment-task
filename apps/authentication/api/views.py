@@ -428,14 +428,6 @@ class PasswordResetRequest(APIView):
         serializer = self.serializer_class(data=request.query_params)
         serializer.is_valid(raise_exception=True)
 
-        # send_email_password_rest.apply_async(
-        #     args=(
-        #         serializer.user,
-        #         serializer.data["email_address"],
-        #         get_current_site(request).domain,
-        #     )
-        # )
-
         # send password reset email
         email_sender = EmailSender(serializer.user)
         email_sender.email_password_rest()
@@ -506,5 +498,5 @@ class VerifyToken(APIView):
 
     def get(self, request, *args, **kwargs):
         token = get_jwt_token(request)
-        payload = verify_email_token(token)
+        verify_email_token(token)
         return Response(status=status.HTTP_200_OK)

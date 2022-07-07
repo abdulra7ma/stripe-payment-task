@@ -12,6 +12,7 @@ djangorestframework = "*"
 django-cors-headers = "*"
 pillow = "*"
 user-agents = "*"
+redis = "*"
 
 [dev-packages]
 black = "*"

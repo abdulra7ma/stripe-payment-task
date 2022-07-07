@@ -10,4 +10,4 @@ class IsOwnerOrAdmin(BasePermission):
         if request.user.is_superuser:
             return True
 
-        return view.get_object.customer == request.user
+        return view.get_object.user == request.user

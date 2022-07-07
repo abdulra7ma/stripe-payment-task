@@ -54,17 +54,9 @@ AUTH_USER_MODEL = "user.User"
 # CELERY_TASK_SERIALIZER = "json"
 # CELERY_RESULT_SERIALIZER = "json"
 # CELERY_TIMEZONE = "Asia/Bishkek"
-# CELERY_IMPORTS = ("apps.flight.workers.tasks",)
+# CELERY_IMPORTS = ("apps.app.workers.tasks",)
 
 
-# #####  CELERY BEAT CONFIGURATION############################
-# CELERY_BEAT_SCHEDULE = {
-#     "delete_flight_ids": {
-#         "task": "delete_flight_ids",
-#         "schedule": datetime.timedelta(seconds=30),
-#         "options": {"expires": 5 * 60},
-#     }
-# }
 
 
 # #####  DJANGO LOGGING CONFIGURATION############################
