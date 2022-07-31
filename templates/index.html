@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block left_navbar %}
+<li class="sidebar-item">
+   <a class="sidebar-link has-arrow waves-effect waves-dark"
+      aria-expanded="false"><i class="mdi mdi-face"></i
+      >
+   <span class="hide-menu">Students</span></a>
+   <ul aria-expanded="false" class="collapse first-level">
+      <li class="sidebar-item">
+         <a href="{% url 'school:add-student' %}" class="sidebar-link"><i class="mdi mdi-emoticon"></i>
+         <span class="hide-menu">add student</span></a>
+      </li>
+      <li class="sidebar-item">
+         <a href="{% url 'school:students-list' %}" class="sidebar-link"><i class="mdi mdi-emoticon-cool"></i>
+         <span class="hide-menu">All Students</span></a>
+      </li>
+   </ul>
+</li>
+</li>
+{% endblock left_navbar %}
+      
+<!-- ============================================================== -->
+<!-- End Left Sidebar - style you can find in sidebar.scss  -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Page wrapper  -->
+<!-- ============================================================== -->
+{% block content %}
+<div class="page-wrapper">
+   <!-- ============================================================== -->
+   <!-- Bread crumb and right sidebar toggle -->
+   <!-- ============================================================== -->
+   <div class="page-breadcrumb">
+      <div class="row">
+         <div class="col-12 d-flex no-block align-items-center">
+            <h4 class="page-title">Dashboard</h4>
+         </div>
+      </div>
+   </div>
+   <!-- ============================================================== -->
+   <!-- End Bread crumb and right sidebar toggle -->
+   <!-- ============================================================== -->
+   <!-- ============================================================== -->
+   <!-- Container fluid  -->
+   <!-- ============================================================== -->
+   <div class="container-fluid">
+      <!-- ============================================================== -->
+      <!-- Sales Cards  -->
+      <!-- ============================================================== -->
+      </li>
+   </div>
+</div>
+{% endblock content %}

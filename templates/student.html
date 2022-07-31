@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block left_navbar %}
+<li class="sidebar-item">
+   <a class="sidebar-link has-arrow waves-effect waves-dark"
+      aria-expanded="false"><i class="mdi mdi-face"></i
+      >
+   <span class="hide-menu">Students</span></a>
+   <ul aria-expanded="false" class="collapse first-level">
+      <li class="sidebar-item">
+         <a href="{% url 'school:add-student' %}" class="sidebar-link"><i class="mdi mdi-emoticon"></i>
+         <span class="hide-menu">add student</span></a>
+      </li>
+      <li class="sidebar-item">
+         <a href="{% url 'school:students-list' %}" class="sidebar-link"><i class="mdi mdi-emoticon-cool"></i>
+         <span class="hide-menu">All Students</span></a>
+      </li>
+   </ul>
+</li>
+</li>
+{% endblock left_navbar %}
+{% block content %}
+   <!-- ============================================================== -->
+   <!-- Page wrapper  -->
+   <!-- ============================================================== -->
+   <div class="page-wrapper">
+      <!-- ============================================================== -->
+      <!-- Container fluid  -->
+      <!-- ============================================================== -->
+      <div class="container-fluid">
+         <!-- Form -->
+         {% if form.errors %}
+            {% for field in form %}
+               {% if field.errors %}
+                  <div class="alert alert-primary" role="alert">
+                     {{ field.errors|striptags }}
+                  </div>
+               {% endif %}
+            {% endfor %}
+         {% endif %}
+         <!-- ============================================================== -->
+         <!-- Start Page Content -->
+         <!-- ============================================================== -->
+         <div class="row">
+            <div class="col-md-8">
+               <div class="card">
+                  <form class="form-horizontal" id="studentform" action="." method="post">
+                     {% csrf_token %}
+                     <div class="card-body">
+                        <h4 class="card-title">{{ form_title }}</h4>
+                        {% for field in form.visible_fields %}
+                           <div class="form-group row">
+                              <label for="fname" class="col-sm-3 text-end control-label col-form-label">{{ field.label }}</label>
+                              <div class="col-sm-9">
+                                 {{ field }}
+                              </div>
+                           </div>
+                        {% endfor %}
+                     </div>
+                     <div class="border-top">
+                        <div class="card-body">
+                           {% if form_title == "Create Student" %}
+                              <button type="submit" class="btn btn-primary">Create</button>
+                           {% else %}
+                              <button type="submit" class="btn btn-primary">Update</button>
+                              <a class="btn btn-danger" href="{% url 'school:delete-student' student.pk %}">Delete</a>
+                           {% endif %}
+                        </div>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+         <!-- ============================================================== -->
+         <!-- End PAge Content -->
+         <!-- ============================================================== -->
+      </div>
+      <!-- ============================================================== -->
+      <!-- End Container fluid  -->
+      <!-- ============================================================== -->
+   </div>
+   <!-- ============================================================== -->
+   <!-- End Page wrapper  -->
+   <!-- ============================================================== -->
+{% endblock content %}

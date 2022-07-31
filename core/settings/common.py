@@ -48,21 +48,14 @@ DJANGO_DEFAULT_APPS = (
 
 
 LOCAL_APPS = (
-    "user",
+    "school",
     "authentication",
-)
-
-THIRD_PARTY_APPS = (
-    "rest_framework",
-    "rest_framework_simplejwt",
-    "drf_yasg",
-    "corsheaders",
-    "rest_framework_simplejwt.token_blacklist",
+    "django_extensions"
 )
 
 
 # these are the apps
-DEFAULT_APPS = DJANGO_DEFAULT_APPS + LOCAL_APPS + THIRD_PARTY_APPS
+DEFAULT_APPS = DJANGO_DEFAULT_APPS + LOCAL_APPS
 
 # Middlewares
 MIDDLEWARE = [

@@ -1,0 +1,32 @@
+{% extends "authentication/auth_base.html" %}
+{% block title %}
+   Login
+{% endblock title %}
+{% block form_body_inputs %}
+   <div class="input-group mb-3">
+      <div class="input-group-prepend">
+         <span
+            class="input-group-text bg-success text-white h-100"
+            id="basic-addon1"
+            ><i class="mdi mdi-account fs-4"></i
+            ></span>
+      </div>
+      {{ form.phone_number }}
+   </div>
+   <div class="input-group mb-3">
+      <div class="input-group-prepend">
+         <span
+            class="input-group-text bg-warning text-white h-100"
+            id="basic-addon2"
+            ><i class="mdi mdi-lock fs-4"></i
+            ></span>
+      </div>
+      {{ form.password }}
+   </div>
+{% endblock form_body_inputs %}
+{% block form_body_buttons %}
+   <div class="pt-3">
+      <button class="btn btn-success float-end text-white" type="submit">Log In</button>
+      <a class="btn btn-info" id="to-recover" type="button" href="{% url 'auth:signup' %}">Create account?</a>
+   </div>
+{% endblock form_body_buttons %}
