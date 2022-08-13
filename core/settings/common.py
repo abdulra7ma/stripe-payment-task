@@ -19,6 +19,9 @@ STATIC_ROOT = join(PROJECT_ROOT, "run", "static")
 # collect media files here
 MEDIA_ROOT = join(PROJECT_ROOT, "run", "media")
 
+# main project app
+CORE_APP = join(PROJECT_ROOT, "core")
+
 # look for static assets here
 STATICFILES_DIRS = [
     join(PROJECT_ROOT, "static"),
@@ -48,14 +51,14 @@ DJANGO_DEFAULT_APPS = (
 
 
 LOCAL_APPS = (
-    "school",
-    "authentication",
+    "stats",
     "django_extensions"
 )
 
 
 # these are the apps
 DEFAULT_APPS = DJANGO_DEFAULT_APPS + LOCAL_APPS
+
 
 # Middlewares
 MIDDLEWARE = [

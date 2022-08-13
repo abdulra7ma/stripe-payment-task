@@ -1,5 +1,5 @@
 make --dry-run --always-make --keep-going --print-directory
-make: Entering directory `/Users/abdulrahmandawoud/handy/interviews/school-site'
+make: Entering directory `/Users/abdulrahmandawoud/handy/interviews/google_statistics_puller'
 echo ""
 echo "  clean        Removes all temporary files"
 echo "  current      Runs the tox-environment for the current development"
@@ -8,5 +8,5 @@ echo "  doc-srv      Serves the documentation on port 8082 (and automatically bu
 echo "  serve        Runs the Django development server on port 8080"
 echo "  tox          Runs complete tox test"
 echo ""
-make: Leaving directory `/Users/abdulrahmandawoud/handy/interviews/school-site'
+make: Leaving directory `/Users/abdulrahmandawoud/handy/interviews/google_statistics_puller'
  

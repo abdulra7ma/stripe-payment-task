@@ -9,12 +9,9 @@ urlpatterns = [
         "admin/doc/",
         include("django.contrib.admindocs.urls"),
     ),
-    path(
-        "school/",
-        include("school.urls", namespace="school"),
-    ),
-    path(
-        "auth/",
-        include("authentication.urls"),
-    ),
+
+    # path(
+    #     "stats/",
+    #     include("statistics.urls"),
+    # ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

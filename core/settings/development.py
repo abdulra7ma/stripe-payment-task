@@ -12,27 +12,20 @@ ALLOWED_HOSTS = ["*"]
 
 
 # ##### DATABASE CONFIGURATION ############################
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": join(PROJECT_ROOT, "run", "dev.sqlite3"),
-#     }
-# }
-
 DATABASES = {
-    "default": env.db("CORE_DATABASE_URL", default="psql://postgres:schoolsite_db_password_1@database:5432/schoolsite_db")
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": join(PROJECT_ROOT, "run", "dev.sqlite3"),
+    }
 }
 
-# ##### APPLICATION CONFIGURATION #########################
+# DATABASES = {
+#     "default": env.db("CORE_DATABASE_URL", default="psql://postgres:schoolsite_db_password_1@database:5432/schoolsite_db")
+# }
 
+# ##### APPLICATION CONFIGURATION #########################
 INSTALLED_APPS = DEFAULT_APPS
 
-
-AUTH_USER_MODEL = "school.Teacher"
-
-LOGIN_URL = "/auth/login/"
-LOGIN_REDIRECT_URL = "/school/"
-LOGOUT_REDIRECT_URL = "/auth/login/"
 
 SENDGRID_API_KEY = env("SENDGRID_API_KEY", default="API_KEY")
 EMAIL_USE_TLS = True
