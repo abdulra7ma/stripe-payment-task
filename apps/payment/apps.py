@@ -1,7 +1,7 @@
-# Django imports
 from django.apps import AppConfig
 
 
-class AccountsConfig(AppConfig):
+class PaymentConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "stats"
+    name = "apps.payment"
+    label = "payment"

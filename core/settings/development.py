@@ -1,11 +1,11 @@
-from datetime import datetime
 from os.path import join
 
+from decouple import config
+
 from .common import *
-from .environment import env
 
 # ##### DEBUG CONFIGURATION ###############################
-DEBUG = env("DEBUG", default=False)
+DEBUG = config("DEBUG", default=False)
 
 # allow all hosts during development
 ALLOWED_HOSTS = ["*"]
@@ -14,23 +14,19 @@ ALLOWED_HOSTS = ["*"]
 # ##### DATABASE CONFIGURATION ############################
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": join(PROJECT_ROOT, "run", "dev.sqlite3"),
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": config("POSTGRES_DATABASE_NAME", default="postgres", cast=str),
+        "USER": config("POSTGRES_DATABASE_USER", default="postgres", cast=str),
+        "PASSWORD": config(
+            "POSTGRES_DATABASE_PASSWORD", default="password", cast=str
+        ),
+        "HOST": config("POSTGRES_DATABASE_HOST", default="localhost", cast=str),
+        "PORT": config("POSTGRES_DATABASE_PORT", default="5432", cast=str),
     }
 }
 
-# DATABASES = {
-#     "default": env.db("CORE_DATABASE_URL", default="psql://postgres:schoolsite_db_password_1@database:5432/schoolsite_db")
-# }
 
 # ##### APPLICATION CONFIGURATION #########################
 INSTALLED_APPS = DEFAULT_APPS
 
-
-SENDGRID_API_KEY = env("SENDGRID_API_KEY", default="API_KEY")
-EMAIL_USE_TLS = True
-EMAIL_HOST = "smtp.sendgrid.net"
-EMAIL_HOST_USER = "apikey"
-EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
-EMAIL_PORT = 587
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+APPEND_SLASH = False
