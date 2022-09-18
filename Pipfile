@@ -6,11 +6,8 @@ name = "pypi"
 [packages]
 django = "*"
 python-decouple = "*"
-drf-yasg = "*"
-djangorestframework-simplejwt = "*"
-djangorestframework = "*"
 django-cors-headers = "*"
-pillow = "*"
+psycopg2 = "*"
 
 [dev-packages]
 black = "*"

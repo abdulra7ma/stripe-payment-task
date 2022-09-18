@@ -1,38 +1,8 @@
-# Python imports
-import sys
-from os.path import abspath, basename, dirname, join, normpath
+from os.path import join, normpath
 
-# ##### PATH CONFIGURATION ################################
+from .path import *
 
-# fetch Django's project directory
-DJANGO_ROOT = dirname(dirname(abspath(__file__)))
-
-# fetch the project_root
-PROJECT_ROOT = dirname(DJANGO_ROOT)
-
-# the name of the whole site
-SITE_NAME = basename(DJANGO_ROOT)
-
-# collect static files here
-STATIC_ROOT = join(PROJECT_ROOT, "run", "static")
-
-# collect media files here
-MEDIA_ROOT = join(PROJECT_ROOT, "run", "media")
-
-# look for static assets here
-STATICFILES_DIRS = [
-    join(PROJECT_ROOT, "static"),
-]
-
-# look for templates here
-# This is an internal setting, used in the TEMPLATES directive
-PROJECT_TEMPLATES = [
-    join(PROJECT_ROOT, "templates"),
-]
-
-# add apps/ to the Python path
-sys.path.append(normpath(join(PROJECT_ROOT, "apps")))
-
+# from .logging import *        # activate django logging
 
 # ##### APPLICATION CONFIGURATION #########################
 DJANGO_DEFAULT_APPS = (
@@ -46,20 +16,13 @@ DJANGO_DEFAULT_APPS = (
     "django.contrib.sites",
 )
 
+LOCAL_APPS = ("apps.payment.apps.PaymentConfig",)
 
-LOCAL_APPS = ("authentication", "user")
-
-THIRD_PARTY_APPS = (
-    "rest_framework",
-    "rest_framework_simplejwt",
-    "drf_yasg",
-    "corsheaders",
-    "rest_framework_simplejwt.token_blacklist",
-)
+THIRD_PARTY_APPS = ("corsheaders",)
 
 
 # these are the apps
-DEFAULT_APPS = DJANGO_DEFAULT_APPS + LOCAL_APPS + THIRD_PARTY_APPS
+DEFAULT_APPS = DJANGO_DEFAULT_APPS + THIRD_PARTY_APPS
 
 # Middlewares
 MIDDLEWARE = [
@@ -93,20 +56,11 @@ TEMPLATES = [
     },
 ]
 
-# Internationalization
-USE_I18N = False
-
-
 # ##### SECURITY CONFIGURATION ############################
 
 # We store the secret key here
 # The required SECRET_KEY is fetched at the end of this file
 SECRET_FILE = normpath(join(PROJECT_ROOT, "run", "SECRET.key"))
-
-# these persons receive error notification
-ADMINS = (("your name", "your_name@example.com"),)
-MANAGERS = ADMINS
-
 
 # ##### DJANGO RUNNING CONFIGURATION ######################
 
@@ -115,16 +69,6 @@ WSGI_APPLICATION = "%s.wsgi.application" % SITE_NAME
 
 # the root URL configuration
 ROOT_URLCONF = "%s.urls" % SITE_NAME
-
-# the URL for static files
-STATIC_URL = "/static/"
-
-# the URL for media files
-MEDIA_URL = "/media/"
-
-
-# ##### DEBUG CONFIGURATION ###############################
-DEBUG = False
 
 
 # finally grab the SECRET KEY
