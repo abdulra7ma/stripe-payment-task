@@ -84,8 +84,9 @@ class CheckoutView(TemplateView):
 
             if item:
                 # create Order object
-                order = OrderService().create_order(item)
-            raise Http404
+                OrderService().create_order(item=item)
+            else:
+                raise Http404
 
         return super().get(request, *args, **kwargs)
 

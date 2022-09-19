@@ -1,11 +1,11 @@
-# School Site
+# Stripe Payment Task
 
 ## Table of contents
-- [School Site](#school-site)
+- [Stripe Payment Task](#stripe-payment-task)
   - [Table of contents](#table-of-contents)
   - [Setup](#setup)
-  - [APP-LOGIC](#app-logic)
-    - [Main features](#main-features)
+  - [App Logic](#app-logic)
+    - [Main Tasks](#main-tasks)
   - [run in dev environment](#run-in-dev-environment)
   - [Run it with docker](#run-it-with-docker)
   - [run test files](#run-test-files)
@@ -14,49 +14,62 @@
 1. install pipenv 
 ```
 pip install pipenv
-
 ```
-2. install needed packages and activate the venv
+2. установить необходимые пакеты и активировать venv
 ```
 pipenv install
 pipenv shell
 ```
 
-## APP-LOGIC
-Simple school system where a teacher could add/edit/delete a student
+## App Logic
+смоделировать магазин электронной коммерции, где покупатель может выбрать товар и купить его с помощью Stripe.
 
-### Main features
-1. notify student by email after been added to one class
-2. teacher is able to login by phone number
+### Main Tasks
+- [x] созданы основные views 
+- [x] целевая страница для перечисления всех предметов
+- [x] целевая страница для перечисления всех предметов
+- [x] интегрированный Stripe PaymentIntent
+- [x] докеризировал приложение
+- [x] используемые переменные окружения
+- [x] зарегистрированные модели в админке Django
+- [x] созданное приложение «Заказать»
+- [x] протестировано большинство компонентов приложения
+- [x] отдельный уровень взаимодействия с базой данных на сервисы
+- [x] Задокументирована большая часть кода приложения
+- [x] загрузил приложение на удаленный сервер
 
 ## run in dev environment
 
-1. migrate database
+1. перенести базу данных
 ```
 python manange.py migrate
 ```
-2. run development server
+2. запустить сервер разработки
 ```
-python manange.py runserver
+python manange.py runserver 8000
+```
+3. загрузить предварительно заполненные данные в базу данных
+```
+python manange.py loaddata fixtures.json
 ```
 
 
 ## Run it with docker
 1. docker compose up
 ```
-docker-compose --file docker-compose-local.yml --project-name=school_site up
+docker-compose --file docker-compose-local.yml --project-name=stripe_payment_task up
 ```
 2. docker compose down
 ```
-docker-compose --file docker-compose-local.yml --project-name=school_site down
+docker-compose --file docker-compose-local.yml --project-name=stripe_payment_task down
 ```
 
 ## run test files
-1. install dev dependencies
+1. установить зависимости от разработчиков
 ```
 pipenv install --dev
 ```
-2. run all test files in the project
+2. запустить все тестовые файлы в проекте
 ```
 pytest --cache-clear --capture=no --showlocals --verbose
 ```

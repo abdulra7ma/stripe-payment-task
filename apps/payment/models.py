@@ -21,4 +21,4 @@ class Item(DateTimeMixin):
 
 
 class Order(DateTimeMixin):
-    item = models.ForeignKey(Item, on_delete=models.SET_NULL, null=True)
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)

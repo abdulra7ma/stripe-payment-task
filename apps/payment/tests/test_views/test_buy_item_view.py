@@ -18,7 +18,7 @@ def test_get_checkout_session_id_from_buy_item_view_success(client):
     response = client.get(url)
 
     assert response.status_code == 200
-    assert "sessionId" in json.loads(response.content)
+    assert "id" in json.loads(response.content)
 
 
 @pytest.mark.django_db

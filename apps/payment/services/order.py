@@ -5,7 +5,7 @@ from apps.payment.models import Item, Order
 
 class OrderService:
     @transaction.atomic
-    def create_order(self, item: Item):
+    def create_order(self, *, item: Item = None):
         """
         Create new Order object
 

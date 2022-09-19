@@ -1,14 +1,7 @@
 from django.urls import path
 
-from .views import (
-    BuyItemView,
-    CancelledView,
-    CheckoutView,
-    HomePageView,
-    ItemView,
-    StripeConfig,
-    SuccessView,
-)
+from .views import (BuyItemView, CancelledView, CheckoutView, HomePageView,
+                    ItemView, StripeConfig, SuccessView)
 
 urlpatterns = [
     path("", HomePageView.as_view(), name="home-page"),
