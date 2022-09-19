@@ -18,3 +18,7 @@ class Item(DateTimeMixin):
     price = models.DecimalField(
         verbose_name="Item Price", max_digits=12, decimal_places=2
     )
+
+
+class Order(DateTimeMixin):
+    item = models.ForeignKey(Item, on_delete=models.SET_NULL, null=True)

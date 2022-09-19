@@ -12,6 +12,6 @@ def get_item_by_id(item_id: int) -> Item | None:
 
     """
     try:
-        return Item.objects.get(id=item_id)
+        return Item.objects.get(pk=item_id)
     except Item.DoesNotExist:
         return None

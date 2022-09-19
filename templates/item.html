@@ -1,0 +1,20 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+{% block title %}item - {{ item.name }}{% endblock title %}
+
+{% block js_header_scripts %}
+<script src="https://js.stripe.com/v3/"></script>
+<script src="{% static 'js/main.js' %}"></script>
+{% endblock js_header_scripts %}
+
+{% block content %}
+    <div class="card">
+        <h1>{{item.name}}</h1>
+        <p class="price">${{item.price}}</p>
+        <p>{{item.description}}</p>
+        <p><button id="submitBtn">buy</button></p>
+    </div>
+    {{ item.id|json_script:"item-id" }}
+{% endblock content %}
+

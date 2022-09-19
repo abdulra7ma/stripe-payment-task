@@ -9,9 +9,5 @@ urlpatterns = [
         "admin/doc/",
         include("django.contrib.admindocs.urls"),
     ),
-
-    path(
-        "",
-        include("payment.urls"),
-    ),
+    path("", include("payment.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

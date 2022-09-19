@@ -20,7 +20,9 @@ DATABASES = {
         "PASSWORD": config(
             "POSTGRES_DATABASE_PASSWORD", default="password", cast=str
         ),
-        "HOST": config("POSTGRES_DATABASE_HOST", default="localhost", cast=str),
+        "HOST": config(
+            "POSTGRES_DATABASE_HOST", default="localhost", cast=str
+        ),
         "PORT": config("POSTGRES_DATABASE_PORT", default="5432", cast=str),
     }
 }
@@ -30,3 +32,5 @@ DATABASES = {
 INSTALLED_APPS = DEFAULT_APPS
 
 APPEND_SLASH = False
+
+SITE_ID = 1

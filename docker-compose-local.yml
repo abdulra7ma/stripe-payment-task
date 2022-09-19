@@ -6,7 +6,7 @@ services:
       POSTGRES_PASSWORD: schoolsite_db_password_1
     image: postgres:14.1
     ports:
-      - 127.0.0.1:5432:5432/tcp
+      - 5432:5432
     restart: always
     volumes:
       - pg_data:/var/lib/postgresql/data:rw
