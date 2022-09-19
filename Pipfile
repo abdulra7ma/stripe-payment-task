@@ -16,6 +16,7 @@ pytest = "*"
 pytest-django = "*"
 isort = "*"
 
+
 [requires]
 python_version = "3.10"
 

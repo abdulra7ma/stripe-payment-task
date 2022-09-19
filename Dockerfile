@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends gcc
 # Install python dependencies in /.venv
 COPY Pipfile .
 COPY Pipfile.lock .
-RUN PIPENV_VENV_IN_PROJECT=1 pipenv install --deploy
+RUN PIPENV_VENV_IN_PROJECT=1 pipenv install
 
 
 FROM base AS runtime
@@ -26,11 +26,11 @@ COPY --from=python-deps /.venv /.venv
 ENV PATH="/.venv/bin:$PATH"
 
 # CREATE and switch to a new user
-RUN useradd --create-home schooluser
-WORKDIR /home/schooluser
-USER schooluser
+RUN useradd --create-home payment_task_user
+WORKDIR /home/payment_task_user
+USER payment_task_user
 
 # Install application into container
 RUN mkdir code/
-WORKDIR /home/schooluser/code/
+WORKDIR /home/payment_task_user/code/
 COPY . .

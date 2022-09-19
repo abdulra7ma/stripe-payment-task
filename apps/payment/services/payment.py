@@ -58,7 +58,6 @@ class PaymentService:
                 currency=currency,
                 payment_method_types=["card"],
             )
-            print(payment_intent)
             return JsonResponse(payment_intent)
         except Exception as e:
             print(str(e))

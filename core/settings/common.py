@@ -18,11 +18,9 @@ DJANGO_DEFAULT_APPS = (
 
 LOCAL_APPS = ("apps.payment.apps.PaymentConfig",)
 
-THIRD_PARTY_APPS = ("corsheaders",)
-
 
 # these are the apps
-DEFAULT_APPS = DJANGO_DEFAULT_APPS + LOCAL_APPS + THIRD_PARTY_APPS
+DEFAULT_APPS = DJANGO_DEFAULT_APPS + LOCAL_APPS 
 
 # Middlewares
 MIDDLEWARE = [
