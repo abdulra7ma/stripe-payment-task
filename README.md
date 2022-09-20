@@ -3,23 +3,13 @@
 ## Table of contents
 - [Stripe Payment Task](#stripe-payment-task)
   - [Table of contents](#table-of-contents)
-  - [Setup](#setup)
   - [App Logic](#app-logic)
     - [Main Tasks](#main-tasks)
   - [run in dev environment](#run-in-dev-environment)
-  - [Run it with docker](#run-it-with-docker)
+  - [Run docker for production](#run-docker-for-production)
   - [run test files](#run-test-files)
 
-## Setup
-1. install pipenv 
-```
-pip install pipenv
-```
-2. установить необходимые пакеты и активировать venv
-```
-pipenv install
-pipenv shell
-```
+
 
 ## App Logic
 смоделировать магазин электронной коммерции, где покупатель может выбрать товар и купить его с помощью Stripe.
@@ -40,29 +30,39 @@ pipenv shell
 
 ## run in dev environment
 
-1. перенести базу данных
+1. Создайте образ Docker
 ```
 docker-compose build
 ```
-2. запустить сервер разработки
+2. запустить образ Docker
 ```
 docker-compose up
 ```
-3. загрузить предварительно заполненные данные в базу данных
+3. остановить образ Docker
+```
+docker-compose down
 ```
 
-```
+
+## Run docker for production
 
 
-## Run it with docker
-1. docker compose up
+1. Создайте образ Docker
 ```
-docker-compose --file docker-compose-local.yml --project-name=stripe_payment_task up
+docker-compose --file docker-compose.prod.yml --project-name=stripe_payment_task build
 ```
-2. docker compose down
+2. 
 ```
-docker-compose --file docker-compose-local.yml --project-name=stripe_payment_task down
+docker-compose --file docker-compose.prod.yml --project-name=stripe_payment_task up
 ```
+3. docker compose down
+```
+docker-compose --file docker-compose.prod.yml --project-name=stripe_payment_task down
+```
+- для удаления томов при остановке контейнеров
+   ```
+   docker-compose --file docker-compose.prod.yml --project-name=stripe_payment_task down -v --remove-orphans
+   ```
 
 ## run test files
 1. установить зависимости от разработчиков
