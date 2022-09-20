@@ -19,7 +19,7 @@ class ItemService:
         :rtype: Item
 
         """
-        
+
         item = Item(name=name, description=description, price=price)
         item.save()
         return item

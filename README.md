@@ -42,15 +42,15 @@ pipenv shell
 
 1. перенести базу данных
 ```
-python manange.py migrate
+docker-compose build
 ```
 2. запустить сервер разработки
 ```
-python manange.py runserver 8000
+docker-compose up
 ```
 3. загрузить предварительно заполненные данные в базу данных
 ```
-python manange.py loaddata fixtures.json
+
 ```
 
 
